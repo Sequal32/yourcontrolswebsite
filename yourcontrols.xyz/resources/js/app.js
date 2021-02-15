@@ -1,6 +1,7 @@
 import { App, plugin } from '@inertiajs/inertia-vue'
 import Vue from 'vue'
 import { InertiaProgress } from '@inertiajs/progress'
+import './bootstrap'
 
 InertiaProgress.init()
 Vue.use(plugin)
