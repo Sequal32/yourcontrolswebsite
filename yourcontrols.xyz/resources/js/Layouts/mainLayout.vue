@@ -8,7 +8,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item" :class="{active: path == '/'}">
             <inertia-link href="/" class="nav-link">
               HOME
@@ -29,30 +29,32 @@
               CHANGE LOG
             </inertia-link>
           </li>
-          <li class="nav-item">
-            <inertia-link href="#" class="nav-link">
-              PARTNERS
-            </inertia-link>
-          </li>
           <li class="nav-item" :class="{active: path == '/download'}">
             <inertia-link href="/download" class="nav-link">
               DOWNLOAD
             </inertia-link>
           </li>
           <li class="nav-item">
+            <a href="/member-area" class="nav-link">
+              MEMBER AREA
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav mt-2 mt-lg-0">
+          <li class="nav-item">
             <a href="https://www.paypal.com/paypalme/ctam1207" target="_blank" class="nav-link">
               DONATE
             </a>
           </li>
           <li class="nav-item">
+            <inertia-link href="#" class="nav-link">
+              PARTNERS
+            </inertia-link>
+          </li>
+          <li class="nav-item">
             <a href="https://discord.gg/p7Bzcv3Yjd" target="_blank" class="nav-link">
               DISCORD
             </a>
-          </li>
-          <li class="nav-item">
-            <inertia-link href="#" class="nav-link">
-              MEMBER AREA
-            </inertia-link>
           </li>
         </ul>
       </div>
@@ -64,6 +66,8 @@
 </template>
 
 <script>
+import '../plugins/bootstrap'
+
 export default {
   name: 'MainLayout',
   props:{
@@ -75,6 +79,9 @@ export default {
   data: () => ({
     path: window.location.pathname
   }),
+  metaInfo:{
+    titleTemplate: '%s | YourControls'
+  },
 }
 </script>
 
