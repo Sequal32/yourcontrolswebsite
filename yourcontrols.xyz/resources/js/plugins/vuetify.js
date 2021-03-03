@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+
+const v = window.location.pathname.substring(0, 12) == "/member-area" ? true : false
+if (v) {
+  import('vuetify/dist/vuetify.min.css')
+}
 
 Vue.use(Vuetify)
 
