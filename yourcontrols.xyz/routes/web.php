@@ -16,7 +16,7 @@ use App\Http\Controllers\AuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [PageController::class, "index"]);
+Route::get('/', [PageController::class, "index"])->name("home");
 Route::get('/change-log', [PageController::class, "changelog"]);
 Route::get('/download', [PageController::class, "download"]);
 
@@ -24,8 +24,9 @@ Route::get('/download', [PageController::class, "download"]);
 Route::prefix("/auth")->group(function() {
   Route::get('/login', [AuthController::class, "login"])->name('login');
   Route::get('/login/callback', [AuthController::class, "loginCallback"]);
+  Route::get('/logout', [AuthController::class, "logout"]);
 });
 
-Route::middleware(['auth'])->prefix('/member-area')->group(function () {
-    Route::get('/', [MemberAreaController::class, 'index']);
+Route::middleware(["auth"])->prefix('/member-area')->group(function () {
+    Route::get('/', [MemberAreaController::class, 'index'])->name("member-area");
 });
