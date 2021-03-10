@@ -14,13 +14,25 @@ class MemberAreaSuggestionsController extends Controller
 {
     public function view()
     {
-        return Inertia::render("member-area/suggestions/view",[
-            "suggestions"=>  QueryBuilder::for(Suggestion::class)
-            ->with(['user'])
-            ->get()
-        ])->withViewData([
+        return Inertia::render("member-area/suggestions/view")->withViewData([
             "pageTitle" => "Member Area"
         ]);
+    }
+
+    public function api_paginated_view(Request $request)
+    {
+        $pagination = 20;
+
+        if (!is_null($request->get('perpage')) && $request->get('perpage') > 0) {
+            $pagination = (int)$request->get('perpage');
+        }
+
+        $comments = QueryBuilder::for(Suggestion::class)
+        ->with(['user'])
+        ->defaultSort('-created_at')
+        ->paginate($pagination);
+
+        return $comments;
     }
 
     public function get_submit()
