@@ -11,7 +11,7 @@
         YourControls is a program that allows multiple people to connect their simulators into a single shared flight deck. It allows tasks to be distributed among crewmates, where one can fly the aircraft, while another handles the radios and autopilot. Doing flights on VATSIM has never been more immersive. We’re striving to sync every switch and button in as many aircraft as possible, with support for the A32NX and in the future, other mods.
       </div>
     </div>
-    <div class="container">
+    <!-- <div class="container">
       <br>
       <br>
       <h2>Stats</h2>
@@ -20,7 +20,7 @@
         <div class="col" style="padding:20px"></div>
         <div class="col" style="padding:20px"></div>
       </div>
-    </div>
+    </div> -->
     <div class="container">
       <br>
       <br>
