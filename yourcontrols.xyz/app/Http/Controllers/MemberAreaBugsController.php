@@ -11,16 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class MemberAreaBugsController extends Controller
 {
-    public function index()
-    {
-        return Inertia::render("member-area/bugs/index")->withViewData([
-            "pageTitle" => "Member Area"
-        ]);
-    }
-
     public function get_submit()
     {
-        return Inertia::render("member-area/bugs/report")->withViewData([
+        return Inertia::render("member-area/bugs/index")->withViewData([
             "pageTitle" => "Member Area"
         ]);
     }
@@ -34,24 +27,15 @@ class MemberAreaBugsController extends Controller
         $data = $request->only(["title", "desc", "steps"]);
         $uploadedFiles = [];
         foreach ($files as $index => $file) {
-            // echo $index."<br>";
-            // echo $file."<br>";
-            // Get filename with the extension
             $filenameWithExt = $file->getClientOriginalName();
-            // Get just filename
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
             $extension = $file->getClientOriginalExtension();
-            // Filename to store
             $fileNameToStore= base64_encode($filename).''.time().'.'.$extension;
-            // Upload Image
             $path = str_replace("public", "storage", $request->file($index)->storeAs('public/log_files', $fileNameToStore));
             array_push($uploadedFiles, $path);
         }
         $uploadedFilesJson = json_encode($uploadedFiles);
         $snowflake = new Snowflake();
-        // dd(strtotime(gmdate('Y-m-d H:i:s', time())));
-        // $snowflake->setStartTimeStamp(strtotime(gmdate('Y-m-d H:i:s', time())));
         $bug->snowflake = $snowflake->id();
         $bug->title = $data["title"];
         $bug->desc = $data["desc"];
@@ -78,7 +62,6 @@ class MemberAreaBugsController extends Controller
         foreach($uploadedFiles as $index => $file) {
             $files .= "[LogFile".$index."](https://site.yourcontrols.xyz/".$file.")\n";
         }
-        // $message = $discord->channel->createMessage([
         $discord->channel->createMessage([
             'channel.id' => $channel->id,
             'embed'      => [
@@ -93,10 +76,6 @@ class MemberAreaBugsController extends Controller
             ]
         ]);
         $bug->save();
-        // dd($message);
         return redirect()->route('member-area/bugs/submit');
-        // return Storage::download($path);
-        // return "";
-        // return $bug->id;
     }
 }
