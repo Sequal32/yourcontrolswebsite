@@ -16,4 +16,9 @@ class User extends Authenticatable
         'refreshToken',
         'expiresIn',
     ];
+
+    public function bugs()
+    {
+        return $this->hasMany(Bug::class);
+    }
 }
