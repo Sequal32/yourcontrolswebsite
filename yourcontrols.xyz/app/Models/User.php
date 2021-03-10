@@ -12,9 +12,14 @@ class User extends Authenticatable
     use HasFactory, Notifiable;
 
     protected $hidden = [
+        'id',
         'token',
         'refreshToken',
         'expiresIn',
+        'email',
+        'remember_token',
+        'updated_at',
+        'created_at',
     ];
 
     public function bugs()

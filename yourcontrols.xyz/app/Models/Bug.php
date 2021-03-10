@@ -11,6 +11,6 @@ class Bug extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, "discord_id");
+        return $this->belongsTo(User::class);
     }
 }
