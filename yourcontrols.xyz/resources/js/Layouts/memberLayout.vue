@@ -93,10 +93,7 @@ export default {
   }),
   created() {
     this.$vuetify.theme.dark = true
-    console.log(window.location.pathname)
-    console.log([document.querySelector("#bootstrapCSS")])
     document.querySelector("#bootstrapCSS").parentNode.removeChild(document.querySelector("#bootstrapCSS"));
-    console.log([document.querySelector("#bootstrapCSS")])
   },
   metaInfo:{
     titleTemplate: '%s | Member Area |YourControls'
