@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\MemberAreaController;
 use App\Http\Controllers\MemberAreaBugsController;
+use App\Http\Controllers\MemberAreaSuggestionsController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -29,9 +30,13 @@ Route::prefix("/auth")->group(function() {
 
 Route::middleware(["auth"])->prefix('/member-area')->group(function () {
   Route::prefix('/bugs')->group(function () {
-    Route::redirect('/', '/submit', 301);
+    Route::redirect('/', '/member-area/bugs/submit', 301);
     Route::get('/submit',[MemberAreaBugsController::class, "get_submit"])->name("member-area/bugs/submit");
     Route::post('/submit',[MemberAreaBugsController::class, "post_submit"]);
-  }); 
+  });
+  Route::prefix('/suggestions')->group(function () {
+    Route::get('/submit', [MemberAreaSuggestionsController::class, "get_submit"]);
+    Route::post('/submit', [MemberAreaSuggestionsController::class, "post_submit"]);
+  });
   Route::get('/', [MemberAreaController::class, 'index'])->name("member-area");
 });
