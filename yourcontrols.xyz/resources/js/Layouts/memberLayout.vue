@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire" dark>
-    <v-navigation-drawer app dark clipped v-model="drawer" :temporary="false">
+    <v-navigation-drawer app dark clipped v-model="drawer" dense>
       <v-list>
         <inertia-link as="v-list-item" href="/member-area/" :class="{'v-item--active v-list-item--active': path == '/member-area'}">
           <v-list-item-icon>
@@ -10,19 +10,21 @@
           <v-list-item-title>Home</v-list-item-title>
         </inertia-link>
 
-        <v-list-group
+        <inertia-link as="v-list-item" href="/member-area/bugs/submit" :class="{'v-item--active v-list-item--active': path == '/member-area/bugs/submit'}">
+          <v-list-item-icon>
+            <v-icon>mdi-bug-outline</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-title>Submit a Bug Report</v-list-item-title>
+        </inertia-link>
+        <!-- <v-list-group
           prepend-icon="mdi-bug-outline"
+          v-model="bugPageId"
           color="#fff"
         >
           <template v-slot:activator>
             <v-list-item-title>Bugs</v-list-item-title>
           </template>
-          <v-list-item link >
-            <v-list-item-icon>
-              <v-icon>mdi-checkbook</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>Submit report</v-list-item-title>
-          </v-list-item>
           <v-list-item link >
             <v-list-item-icon>
               <v-icon>mdi-magnify</v-icon>
@@ -35,11 +37,11 @@
             </v-list-item-icon>
             <v-list-item-title>View my reports</v-list-item-title>
           </v-list-item>
-        </v-list-group>
+        </v-list-group> -->
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app dark clipped-left>
+    <v-app-bar app dark clipped-left dense>
       <v-app-bar-nav-icon @click="drawer = !drawer" class="d-flex d-lg-none"></v-app-bar-nav-icon>
       <v-toolbar-title>Member Area | Your Controls</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -84,7 +86,7 @@
 
 <script>
 export default {
-  props: ["user"],
+  props: ["user","bugPageId"],
   data: () => ({
     drawer: null,
     path: window.location.pathname
