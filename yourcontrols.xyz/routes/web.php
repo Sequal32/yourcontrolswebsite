@@ -29,7 +29,7 @@ Route::prefix("/auth")->group(function() {
 
 Route::middleware(["auth"])->prefix('/member-area')->group(function () {
   Route::prefix('/bugs')->group(function () {
-    Route::get('/',[MemberAreaBugsController::class, "index"])->name("member-area/bugs/index");
+    Route::redirect('/', '/submit', 301);
     Route::get('/submit',[MemberAreaBugsController::class, "get_submit"])->name("member-area/bugs/submit");
     Route::post('/submit',[MemberAreaBugsController::class, "post_submit"]);
   }); 
