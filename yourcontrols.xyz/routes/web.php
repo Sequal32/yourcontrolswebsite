@@ -35,7 +35,9 @@ Route::middleware(["auth"])->prefix('/member-area')->group(function () {
     Route::post('/submit',[MemberAreaBugsController::class, "post_submit"]);
   });
   Route::prefix('/suggestions')->group(function () {
-    Route::get('/submit', [MemberAreaSuggestionsController::class, "get_submit"]);
+    Route::get('/view', [MemberAreaSuggestionsController::class, "view"]);
+    Route::redirect('/', '/member-area/suggestions/view', 301);
+    Route::get('/submit', [MemberAreaSuggestionsController::class, "get_submit"])->name("member-area/suggestions/submit");
     Route::post('/submit', [MemberAreaSuggestionsController::class, "post_submit"]);
   });
   Route::get('/', [MemberAreaController::class, 'index'])->name("member-area");
