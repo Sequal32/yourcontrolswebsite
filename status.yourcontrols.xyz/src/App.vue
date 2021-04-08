@@ -88,6 +88,18 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+#app {
+  .chart {
+    width: 100%;
+    height: 500px;
+    margin: auto;
+  }
+  .img {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
+}
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   #app {
