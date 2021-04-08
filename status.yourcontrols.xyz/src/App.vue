@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <div class="img">
-      <img src="./assets/logo.png" alt="">
+      <img src="./assets/logo.png" width="50%" alt="">
       <h2>
         Cloud Server Usage Chart
       </h2>
     </div>
     <div class="chart" v-if="!loading">
-      <apexchart type="area" height="100%" width="100%" :options="chartOptions" :series="seriesComputed"></apexchart>
+      <apexchart type="area" height="500px" width="100%" :options="chartOptions" :series="seriesComputed"></apexchart>
     </div>
     <div class="chart" v-else>
       Loading Chart...
@@ -34,8 +34,6 @@ export default Vue.extend({
       ],
       chartOptions: {
         chart: {
-          height: 350,
-          width: 350,
           type: 'area'
         },
         dataLabels: {
@@ -90,16 +88,70 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-#app {
-  .chart {
-    width: 1200px;
-    height: 500px;
-    margin: auto;
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  #app {
+    .chart {
+      width: 100%;
+      height: 500px;
+      margin: auto;
+    }
+    .img {
+      width: 100%;
+      margin: auto;
+      text-align: center;
+    }
   }
-  .img {
-    width: 1200px;
-    margin: auto;
-    text-align: center;
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  #app {
+    .chart {
+      width: 100%;
+      height: 150px;
+      margin: auto;
+    }
+    .img {
+      img{
+        width: 50%;
+      }
+      width: 100%;
+      margin: auto;
+      text-align: center;
+    }
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  #app {
+    .chart {
+      width: 100%;
+      height: 500px;
+      margin: auto;
+    }
+    .img {
+      width: 100%;
+      margin: auto;
+      text-align: center;
+    }
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  #app {
+    .chart {
+      width: 1200px;
+      height: 500px;
+      margin: auto;
+    }
+    .img {
+      width: 1200px;
+      margin: auto;
+      text-align: center;
+    }
   }
 }
 </style>
