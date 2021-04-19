@@ -1,6 +1,6 @@
 <template>
     <member-layout :user="user">
-        This is under heavy development. Any suggestions would be nice. You can send them in #suggestions and tagging @WebDev or @SafeShows#2002
+        This is under heavy development. Any suggestions would be nice. You can send them <inertia-link href="/member-area/suggestions/submit">here</inertia-link>
     </member-layout>
 </template>
 
