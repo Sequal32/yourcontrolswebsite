@@ -22,7 +22,6 @@ class AuthController extends Controller
         $userData = Socialite::driver('discord')->user();
         $user = $this->getUser($userData);
         Auth::login($user);
-        // return Auth::user();
         return redirect()->route('member-area');
     }
 
@@ -32,7 +31,6 @@ class AuthController extends Controller
             $user = $this->updateUser($userData, $user);
             return $user;
         }else{
-            $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
             $user = new User();
             $user->discord_id = $userData->id;
             $user->avatar = $userData->avatar;
@@ -41,13 +39,9 @@ class AuthController extends Controller
             $user->expiresIn = $userData->expiresIn;
             $user->email = $userData->email;
             $user->username = $userData->nickname;
-            $user->roles_JSON = json_encode($this->getUserRoles($user));
             $user->save();
-            $discord->guild->addGuildMember([
-                "guild.id" => 764805300229636107,
-                "user.id" => (int) $userData->id,
-                "access_token" => $userData->token
-            ]);
+            $this->addUserToGuild($user);
+            $this->updateUserRoles($user);
             return $user;
         }
     }
@@ -60,7 +54,14 @@ class AuthController extends Controller
         $user->expiresIn = $userData->expiresIn;
         $user->email = $userData->email;
         $user->username = $userData->nickname;
-        $user->roles_JSON = json_encode($this->getUserRoles($user));
+        $user->roles_JSON = trim(json_encode($this->updateUserRoles($user)));
+        $user->save();
+        return $user;
+    }
+
+    function updateUserRoles($user)
+    {
+        $user->roles_JSON = trim(json_encode($this->getUserRoles($user)));
         $user->save();
         return $user;
     }
@@ -70,8 +71,8 @@ class AuthController extends Controller
         $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
 
         $member = $discord->guild->getGuildMember([
-            'guild.id' => 764805300229636107,
-            "user.id" => (Integer) $user->discord_id
+            'guild.id'      => 764805300229636107,
+            "user.id"       => (Integer) $user->discord_id
         ]);
 
         $roles = $discord->guild->getGuildRoles(["guild.id" => 764805300229636107]);
@@ -93,6 +94,18 @@ class AuthController extends Controller
 
         return $perms;
     }
+
+    function addUserToGuild($user)
+    {
+        $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
+        
+        $discord->guild->addGuildMember([
+            "guild.id"          => 764805300229636107,
+            "user.id"           => (Integer) $user->discord_id,
+            "access_token"      => $user->token
+        ]);
+    }
+
 
     public function logout()
     {
