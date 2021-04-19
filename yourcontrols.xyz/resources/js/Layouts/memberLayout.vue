@@ -9,14 +9,32 @@
 
           <v-list-item-title>Home</v-list-item-title>
         </inertia-link>
+        
+        <v-list-group
+          prepend-icon="mdi-bug-outline"
+          v-model="bugsPageId"
+          color="#fff"
+        >
+          <template v-slot:activator>
+            <v-list-item-title>Bugs</v-list-item-title>
+          </template>
+          
+          <inertia-link as="v-list-item" href="/member-area/bugs/view" :class="{'v-item--active v-list-item--active': path == '/member-area/bugs/view'}" color="#fff">
+            <v-list-item-icon>
+              <v-icon>mdi-magnify</v-icon>
+            </v-list-item-icon>
 
-        <inertia-link as="v-list-item" href="/member-area/bugs/submit" :class="{'v-item--active v-list-item--active': path == '/member-area/bugs/submit'}" color="#fff">
-          <v-list-item-icon>
-            <v-icon>mdi-bug-outline</v-icon>
-          </v-list-item-icon>
+            <v-list-item-title>View</v-list-item-title>
+          </inertia-link>
+          <inertia-link as="v-list-item" href="/member-area/bugs/submit" :class="{'v-item--active v-list-item--active': path == '/member-area/bugs/submit'}" color="#fff">
+            <v-list-item-icon>
+              <v-icon>mdi-pencil</v-icon>
+            </v-list-item-icon>
 
-          <v-list-item-title>Submit a Bug Report</v-list-item-title>
-        </inertia-link>
+            <v-list-item-title>Submit</v-list-item-title>
+          </inertia-link>
+        </v-list-group>
+
         <v-list-group
           prepend-icon="mdi-head-lightbulb-outline"
           v-model="suggestionsPageId"
@@ -89,7 +107,7 @@
 
 <script>
 export default {
-  props: ["user","bugPageId",
+  props: ["user","bugsPageId",
   "suggestionsPageId"],
   data: () => ({
     drawer: null,
