@@ -85,6 +85,7 @@
               multiple
               dense
               filled
+              :rules="rules.logInput"
               v-model="form.files"
             ></v-file-input>
           </v-col>
@@ -117,7 +118,12 @@ export default {
           focus: false
         }
       ],
-      files: null
+      files: null,
+    },
+    rules: {
+      logInput: [
+        files => !files || !files.some(file => file.size > 2_097_152) || 'Log File should be less then 2 MB!'
+      ]
     }
   }),
 
