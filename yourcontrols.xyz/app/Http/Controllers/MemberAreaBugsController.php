@@ -83,7 +83,7 @@ class MemberAreaBugsController extends Controller
             "allow" => 116736
         ]);
         $bug->save();
-        return redirect()->route('member-area/bugs/submit');
+        return redirect()->route('member-area/bugs/view');
     }
 
     public function api_paginated_view(Request $request)
