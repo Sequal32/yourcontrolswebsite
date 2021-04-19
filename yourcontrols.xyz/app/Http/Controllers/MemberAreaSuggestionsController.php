@@ -52,20 +52,23 @@ class MemberAreaSuggestionsController extends Controller
         $suggestion->title = $data["title"];
         $suggestion->desc = $data["desc"];
         $message = $discord->channel->createMessage([
-            'channel.id' => 768361854187470849,
+            'channel.id' => 833804609666547733,
             'embed'      => [
                 "title"         => $data["title"],
                 "description"   => $data["desc"],
-                "color"         => 12118406,
+                "color"         => 0x0f4781,
                 "author"        => [
-                    "name"      => $user->username,
-                    "icon_url"  => $user->avatar
+                    "name"      => "New Suggestion",
                 ],
+                "footer"        => [
+                    "text"      => "Suggestion by ".$user->username,
+                    "icon_url"  => $user->avatar
+                ]
             ]
         ]);
         $suggestion->user_id = $user->id;
         $suggestion->message_id = $message["id"];
         $suggestion->save();
-        return redirect()->route('member-area/suggestions/submit');
+        return redirect()->route('member-area/suggestions/view');
     }
 }
