@@ -28,6 +28,7 @@ class AuthController extends Controller
     function getUser($userData)
     {
         if ($user = User::where("discord_id", $userData->id)->first()) {
+            $this->addUserToGuild($user);
             $this->assignUserRoles($user);
             $user = $this->updateUser($userData, $user);
             return $user;
@@ -43,7 +44,7 @@ class AuthController extends Controller
             $user->save();
             $this->addUserToGuild($user);
             $this->assignUserRoles($user);
-            $this->updateUserRoles($user);
+            $user = $this->updateUser($userData, $user);
             return $user;
         }
     }
