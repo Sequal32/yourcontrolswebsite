@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 use App\Models\Bug;
-use \Godruoyi\Snowflake\Snowflake;
 use RestCord\DiscordClient;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,8 +35,7 @@ class MemberAreaBugsController extends Controller
             array_push($uploadedFiles, $path);
         }
         $uploadedFilesJson = json_encode($uploadedFiles);
-        $snowflake = new Snowflake();
-        $bug->snowflake = $snowflake->id();
+        $bug->snowflake = Carbon::now()->timestamp;
         $bug->title = $data["title"];
         $bug->desc = $data["desc"];
         $bug->steps = $data["steps"];
@@ -45,7 +44,7 @@ class MemberAreaBugsController extends Controller
         $bug->save();
         $channel = $discord->guild->createGuildChannel([
             "guild.id" => 764805300229636107,
-            "name" => "bug-".$bug->id,
+            "name" => "bug-".$bug->snowflake,
             "type" => 0,
             "parent_id" => 817163288693178438,
         ]);
@@ -68,7 +67,7 @@ class MemberAreaBugsController extends Controller
                 "description" => $data["desc"] ."\n\n\n" . $files,
                 "title" => $data["title"],
                 "author" => [
-                    "name" => "Bug Report #" . $bug->id,
+                    "name" => "Bug Report #" . $bug->snowflake,
                 ],
                 "color" => 0x0f4781,
                 "timestamp" => now(),

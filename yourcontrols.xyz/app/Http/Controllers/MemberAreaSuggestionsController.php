@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 use App\Models\Suggestion;
-use \Godruoyi\Snowflake\Snowflake;
 use RestCord\DiscordClient;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -48,8 +48,7 @@ class MemberAreaSuggestionsController extends Controller
         $user = Auth::user();
         $suggestion = new Suggestion();
         $data = $request->only(["title", "desc"]);
-        $snowflake = new Snowflake();
-        $suggestion->snowflake = $snowflake->id();
+        $suggestion->snowflake = Carbon::now()->timestamp;
         $suggestion->title = $data["title"];
         $suggestion->desc = $data["desc"];
         $message = $discord->channel->createMessage([
