@@ -2,7 +2,7 @@
   <main-layout use-container>
     <div v-for="changelog in changelogArray" :key="changelog.id" class="changelog">
       <h1 class="title"> {{ changelog.version }} </h1>
-      <div class="body" v-html="changelog.body"></div>
+      <div class="changelog-body" v-html="changelog.body"></div>
     </div>
   </main-layout>
 </template>
@@ -48,7 +48,21 @@ export default {
     margin-bottom: 10px;
     color: #000;
   }
-  .body{
+  &::after{
+    content:"";
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+    right: 0;
+    height: 0.5em;
+    width: 100%;
+    border-top: 1px solid #00404c;
+  }
+}
+</style>
+
+<style lang="scss">
+.changelog-body{
     a {
       color: #000;
     }
@@ -66,16 +80,4 @@ export default {
       }
     }
   }
-
-  &::after{
-    content:"";
-    position: absolute;
-    bottom: -25px;
-    left: 0;
-    right: 0;
-    height: 0.5em;
-    width: 100%;
-    border-top: 1px solid #00404c;
-  }
-}
 </style>
