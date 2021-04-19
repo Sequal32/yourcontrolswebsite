@@ -74,6 +74,12 @@ class MemberAreaBugsController extends Controller
                 "fields" => $fields
             ]
         ]);
+        $discord->channel->editChannelPermissions([
+            'channel.id' => $channel->id,
+            "overwrite.id" => (string) $user->discord_id,
+            "type" => 1,
+            "allow" => 116736
+        ]);
         $bug->save();
         return redirect()->route('member-area/bugs/submit');
     }
