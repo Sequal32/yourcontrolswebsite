@@ -52,7 +52,7 @@ class MemberAreaSuggestionsController extends Controller
         $suggestion->title = $data["title"];
         $suggestion->desc = $data["desc"];
         $message = $discord->channel->createMessage([
-            'channel.id' => 833804609666547733,
+            'channel.id' => 765283790737375242,
             'embed'      => [
                 "title"         => $data["title"],
                 "description"   => $data["desc"],
