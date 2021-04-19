@@ -28,6 +28,7 @@ class AuthController extends Controller
     function getUser($userData)
     {
         if ($user = User::where("discord_id", $userData->id)->first()) {
+            $this->assignUserRoles($user);
             $user = $this->updateUser($userData, $user);
             return $user;
         }else{
@@ -41,6 +42,7 @@ class AuthController extends Controller
             $user->username = $userData->nickname;
             $user->save();
             $this->addUserToGuild($user);
+            $this->assignUserRoles($user);
             $this->updateUserRoles($user);
             return $user;
         }
@@ -106,6 +108,21 @@ class AuthController extends Controller
         ]);
     }
 
+    function assignUserRoles($user)
+    {
+        $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
+
+        $discord->guild->addGuildMemberRole([
+            "guild.id"          => 764805300229636107,
+            "user.id"           => (Integer) $user->discord_id,
+            "role.id"           => 780565563180711967,
+        ]);
+        $discord->guild->addGuildMemberRole([
+            "guild.id"          => 764805300229636107,
+            "user.id"           => (Integer) $user->discord_id,
+            "role.id"           => 831373496759877673,
+        ]);
+    }
 
     public function logout()
     {

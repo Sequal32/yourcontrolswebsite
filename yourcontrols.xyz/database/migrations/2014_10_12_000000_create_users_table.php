@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar');
             $table->string('token');
             $table->string('refreshToken');
-            $table->string('roles_JSON');
+            $table->longtext('roles_JSON')->nullable(true);
             $table->integer('expiresIn');
             $table->string('email');
             $table->rememberToken();
