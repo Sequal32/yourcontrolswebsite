@@ -41,6 +41,7 @@ class AuthController extends Controller
             $user->expiresIn = $userData->expiresIn;
             $user->email = $userData->email;
             $user->username = $userData->nickname;
+            $user->roles_JSON = json_encode($this->getUserRoles($user));
             $user->save();
             $discord->guild->addGuildMember([
                 "guild.id" => 764805300229636107,
@@ -59,8 +60,38 @@ class AuthController extends Controller
         $user->expiresIn = $userData->expiresIn;
         $user->email = $userData->email;
         $user->username = $userData->nickname;
+        $user->roles_JSON = json_encode($this->getUserRoles($user));
         $user->save();
         return $user;
+    }
+
+    public function getUserRoles(User $user)
+    {
+        $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
+
+        $member = $discord->guild->getGuildMember([
+            'guild.id' => 764805300229636107,
+            "user.id" => (Integer) $user->discord_id
+        ]);
+
+        $roles = $discord->guild->getGuildRoles(["guild.id" => 764805300229636107]);
+
+        usort($roles, function($a, $b) {
+            if((int)$a->position == (int)$b->position) return 0;
+            if((int)$a->position < (int)$b->position) return 1;
+            if((int)$a->position > (int)$b->position) return -1;
+        });
+        
+        $perms = array();
+        foreach ($roles as $role) {
+            foreach ($member->roles as $value) {
+                if($value === $role->id) {
+                    array_push($perms, $role->name);
+                }
+            }
+        }
+
+        return $perms;
     }
 
     public function logout()
