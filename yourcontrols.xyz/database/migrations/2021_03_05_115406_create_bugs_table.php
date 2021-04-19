@@ -22,6 +22,7 @@ class CreateBugsTable extends Migration
             $table->longText('files');
             $table->longText('user_id');
             $table->longText('channel_id')->nullable();
+            $table->boolean('closed');
             $table->timestamps();
         });
     }

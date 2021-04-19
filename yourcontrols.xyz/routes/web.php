@@ -33,6 +33,7 @@ Route::middleware(["auth"])->prefix('/member-area')->group(function () {
     Route::redirect('/', '/member-area/bugs/submit', 301);
     Route::get('/submit',[MemberAreaBugsController::class, "get_submit"])->name("member-area/bugs/submit");
     Route::post('/submit',[MemberAreaBugsController::class, "post_submit"]);
+    Route::get('/view', [MemberAreaBugsController::class, "view"]);
   });
   Route::prefix('/suggestions')->group(function () {
     Route::get('/view', [MemberAreaSuggestionsController::class, "view"]);

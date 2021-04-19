@@ -8,6 +8,7 @@ use Inertia\Inertia;
 use App\Models\Bug;
 use RestCord\DiscordClient;
 use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class MemberAreaBugsController extends Controller
 {
@@ -40,7 +41,8 @@ class MemberAreaBugsController extends Controller
         $bug->desc = $data["desc"];
         $bug->steps = $data["steps"];
         $bug->files = $uploadedFilesJson;
-        $bug->user_id = $user->discord_id;
+        $bug->user_id = $user->id;
+        $bug->closed = false;
         $bug->save();
         $channel = $discord->guild->createGuildChannel([
             "guild.id" => 764805300229636107,
@@ -82,5 +84,28 @@ class MemberAreaBugsController extends Controller
         ]);
         $bug->save();
         return redirect()->route('member-area/bugs/submit');
+    }
+
+    public function api_paginated_view(Request $request)
+    {
+        $pagination = 20;
+
+        if (!is_null($request->get('perpage')) && $request->get('perpage') > 0) {
+            $pagination = (int)$request->get('perpage');
+        }
+        $comments = QueryBuilder::for(Bug::class)
+        ->with(['user'])
+        ->defaultSort('-created_at')
+        ->where('closed', 'not', 'true')
+        ->paginate($pagination);
+        
+        return $comments;
+    }
+
+    public function view()
+    {
+        return Inertia::render("member-area/bugs/view")->withViewData([
+            "pageTitle" => "Member Area"
+        ]);
     }
 }

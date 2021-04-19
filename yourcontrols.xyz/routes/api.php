@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberAreaSuggestionsController;
+use App\Http\Controllers\MemberAreaBugsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/paginated/suggestions',[MemberAreaSuggestionsController::class, "api_paginated_view"]);
+Route::get('/paginated/bugs',[MemberAreaBugsController::class, "api_paginated_view"]);
