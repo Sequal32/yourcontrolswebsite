@@ -57,8 +57,8 @@ class AuthController extends Controller
         $user->expiresIn = $userData->expiresIn;
         $user->email = $userData->email;
         $user->username = $userData->nickname;
-        $user->roles_JSON = trim(json_encode($this->updateUserRoles($user)));
         $user->save();
+        $this->updateUserRoles($user);
         return $user;
     }
 
@@ -85,7 +85,7 @@ class AuthController extends Controller
             if((int)$a->position < (int)$b->position) return 1;
             if((int)$a->position > (int)$b->position) return -1;
         });
-        
+
         $perms = array();
         foreach ($roles as $role) {
             foreach ($member->roles as $value) {
@@ -101,7 +101,7 @@ class AuthController extends Controller
     function addUserToGuild($user)
     {
         $discord = new DiscordClient(['token' => env('DISCORD_BOT_TOKEN')]);
-        
+
         $discord->guild->addGuildMember([
             "guild.id"          => 764805300229636107,
             "user.id"           => (Integer) $user->discord_id,
