@@ -17,7 +17,9 @@ export default {
         title: "Home"
     },
     data: () => ({}),
-
+    created() {
+        this.user.roles_JSON = JSON.parse(this.user.roles_JSON)
+    },
     methods: {}
 };
 </script>
