@@ -13,14 +13,9 @@ class User extends Authenticatable
 
     protected $hidden = [
         'email',
-        'password',
         'remember_token',
         'updated_at',
         'created_at',
     ];
 
-    public function bugs()
-    {
-        return $this->hasMany(Bug::class);
-    }
 }

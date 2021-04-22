@@ -12,4 +12,14 @@ class PageController extends Controller
             "pageTitle" => "Home"
         ]);
     }
+    public function loginPage() {
+        return Inertia::render("Auth/login")->withViewData([
+            "pageTitle" => "Login"
+        ]);
+    }
+    public function registerPage() {
+        return Inertia::render("Auth/register")->withViewData([
+            "pageTitle" => "Register"
+        ]);
+    }
 }

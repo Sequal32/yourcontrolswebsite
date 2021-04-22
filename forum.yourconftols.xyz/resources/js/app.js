@@ -2,6 +2,8 @@ import { App, plugin } from '@inertiajs/inertia-vue'
 import Vue from 'vue'
 import { InertiaProgress } from '@inertiajs/progress'
 import VueMeta from 'vue-meta'
+import './plugins/bootstrap'
+import '@fortawesome/fontawesome-free/js/all'
 
 Vue.use(VueMeta)
 

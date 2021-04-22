@@ -1,31 +1,27 @@
 <template>
-  <main-layout class="home">
-    <div class="container">
-      INDEX
-    </div>
-  </main-layout>
+    <main-layout :user="user" use-container>
+    </main-layout>
 </template>
 
 <script>
-import mainLayout from "../Layouts/mainLayout.vue"
+import mainLayout from "../Layouts/mainLayout.vue";
 
 export default {
-  components: {
-    mainLayout
-  },
-  metaInfo: {
-    title: 'Home'
-  },
-}
+    props: ["user"],
+    components: {
+        mainLayout
+    },
+    metaInfo: {
+        title: "Home"
+    },
+    data: () => ({
+        user: false
+    }),
+    created() {
+        console.log(this.user)
+    },
+    methods: {}
+};
 </script>
 
-<style lang="scss" scoped>
-.home {
-  color: #000;
-  ul {
-    li {
-      margin-left: 30px;
-    }
-  }
-}
-</style>
+<style></style>
