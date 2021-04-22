@@ -50,7 +50,7 @@
                 <div class="row justify-content-center">
                     <inertia-link href="/" class="col-6 text-dark" style="text-align:center">
                         <h6>
-                            <i class="fab fa-discord"></i> Sign up with Discord
+                            <i class="fab fa-discord"></i> Register with Discord
                         </h6>
                     </inertia-link>
                 </div>
@@ -58,7 +58,7 @@
                 <div class="row justify-content-center">
                     <inertia-link href="/" class="col-4 text-dark" style="text-align:center">
                     <h6>
-                        <i class="fab fa-google"></i> Sign up with Google
+                        <i class="fab fa-google"></i> Register with Google
                     </h6>
                     </inertia-link>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="row justify-content-center">
                     <inertia-link href="/" class="col-4 text-dark" style="text-align:center;">
                     <h6>
-                        <i class="fab fa-github"></i> Sign up with GitHub
+                        <i class="fab fa-github"></i> Register with GitHub
                     </h6>
                     </inertia-link>
                 </div>
