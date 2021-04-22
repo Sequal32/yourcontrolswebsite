@@ -14,16 +14,6 @@
                         HOME
                         </inertia-link>
                     </li>
-                    <li class="nav-item" :class="{active: path == '/login'}" v-if="!user">
-                        <inertia-link href="/login" class="nav-link">
-                        HOME
-                        </inertia-link>
-                    </li>
-                    <li class="nav-item" :class="{active: path == '/register'}" v-if="!user">
-                        <inertia-link href="/register" class="nav-link">
-                        HOME
-                        </inertia-link>
-                    </li>
                 </ul>
                 <ul class="navbar-nav mt-2 mt-lg-0" v-if="user">
                     <li class="nav-item dropdown">
@@ -31,6 +21,18 @@
                         <div class="dropdown-menu">
                             <inertia-link class="dropdown-item" href="/logout">Logout</inertia-link>
                         </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mt-2 mt-lg-0" v-else>
+                    <li class="nav-item" :class="{active: path == '/login'}" v-if="!user">
+                        <inertia-link href="/login" class="nav-link">
+                        login
+                        </inertia-link>
+                    </li>
+                    <li class="nav-item" :class="{active: path == '/register'}" v-if="!user">
+                        <inertia-link href="/register" class="nav-link">
+                        Register
+                        </inertia-link>
                     </li>
                 </ul>
             </div>
