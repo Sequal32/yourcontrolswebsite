@@ -11,7 +11,7 @@
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item" :class="{active: path == '/'}">
                         <inertia-link href="/" class="nav-link">
-                        HOME
+                        Home
                         </inertia-link>
                     </li>
                 </ul>
@@ -26,7 +26,7 @@
                 <ul class="navbar-nav mt-2 mt-lg-0" v-else>
                     <li class="nav-item" :class="{active: path == '/login'}" v-if="!user">
                         <inertia-link href="/login" class="nav-link">
-                        login
+                        Login
                         </inertia-link>
                     </li>
                     <li class="nav-item" :class="{active: path == '/register'}" v-if="!user">
