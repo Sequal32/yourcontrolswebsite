@@ -21,7 +21,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: /forum.yourcontrols.xyz/client
+        working-directory: forum.yourcontrols.xyz/client
 
     steps:
       - name: Checkout 🛎
