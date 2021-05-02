@@ -19,6 +19,10 @@ jobs:
         os: [ubuntu-latest]
         node: [14]
 
+    defaults:
+      run:
+        working-directory: /forum.yourcontrols.xyz/client
+
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@master
