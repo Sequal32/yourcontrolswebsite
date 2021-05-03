@@ -1,4 +1,4 @@
-name: ci
+name: forum
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
       - master
 
 jobs:
-  ci:
+  client:
     runs-on: ${{ matrix.os }}
 
     strategy:
