@@ -7,35 +7,36 @@ import {
   Entity,
   UpdateDateColumn
 } from 'typeorm';
-import { User } from './User';
+import User  from './User';
 import { RelationColumn } from '../helpers';
 
 @Entity()
 @ObjectType()
-export class Post {
-  constructor() {}
-  @Field()
-  @PrimaryGeneratedColumn()
-  public readonly id: number;
-  @Field()
-  @Column()
-  public title: string;
+export default class Post {
+    constructor() {}
+    @Field()
+    @PrimaryGeneratedColumn()
+    public readonly id: number;
 
-  @Field()
-  @Column()
-  public body: string;
+    @Field()
+    @Column()
+    public title: string;
 
-  @Field({ description: 'Date Time the post was created' })
-  @CreateDateColumn()
-  public createdDate: Date;
+    @Field()
+    @Column()
+    public body: string;
 
-  @Field()
-  @UpdateDateColumn()
-  public updatedDate: Date;
+    @Field({ description: 'Date Time the post was created' })
+    @CreateDateColumn()
+    public createdDate: Date;
 
-  // @Field(type => User)
-  @ManyToOne(type => User)
-  user: User;
-  @RelationColumn()
-  userId: number;
+    @Field()
+    @UpdateDateColumn()
+    public updatedDate: Date;
+
+    // @Field(type => User)
+    @ManyToOne(type => User)
+    user: User;
+    @RelationColumn()
+    userId: number;
 }

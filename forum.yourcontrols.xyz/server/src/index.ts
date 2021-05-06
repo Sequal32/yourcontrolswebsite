@@ -10,12 +10,12 @@ TypeGraphQL.useContainer(Container);
 TypeORM.useContainer(Container);
 
 async function bootstrap() {
-  const db = await bootstrapDatabase();
+    const db = await bootstrapDatabase();
 
-  const server = await createServer(db);
-  server.start({}, deets => {
-    console.log(`Server is now running on port http://localhost:${deets.port}`);
-  });
+    const server = await createServer(db);
+    server.start({}, deets => {
+        console.log(`Server is now running on port http://localhost:${deets.port}`);
+    });
 }
 
 bootstrap();

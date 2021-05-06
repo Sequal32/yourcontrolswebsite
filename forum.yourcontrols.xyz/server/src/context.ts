@@ -1,8 +1,8 @@
-import { User } from './entities/User';
+import { User } from './entities';
 
 /**
  * GraphQL server context type
  */
 export interface Context {
-  user?: User;
+    user?: User;
 }
