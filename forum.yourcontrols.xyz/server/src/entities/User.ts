@@ -1,35 +1,45 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from 'typeorm';
+import { Entity, Column, BeforeInsert, PrimaryColumn , JoinTable, ManyToMany } from 'typeorm';
+import { Snowflake } from "../utils"
+import Role from "./Role"
 import * as bcrypt from 'bcryptjs';
+import { ObjectType, Field } from 'type-graphql';
 
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+@ObjectType()
+export default class User {
+    @Field()
+    @PrimaryColumn({type:"bigint"})
+    id: number;
 
-  @Column({ length: 50 })
-  firstName: string;
-  @Column({ length: 50 })
-  lastName: string;
+    @Field()
+    @Column({ length: 50 })
+    username: string;
 
-  @Column({ unique: true })
-  email: string;
+    @Field()
+    @Column({ unique: true})
+    email: string;
 
-  @Column()
-  password: string;
+    @Column({ select: false })
+    password: string;
 
-  @BeforeInsert()
-  async hashPassword() {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
+    @Field((type) => [Role])
+    @ManyToMany(() => Role)
+    @JoinTable()
+    roles: Role[]
 
-  /**
-   * Compare a password against the user entity
-   *
-   * @param {string} attempt
-   * @returns {Promise<boolean>}
-   * @memberof User
-   */
-  async comparePassword(attempt: string): Promise<boolean> {
-    return await bcrypt.compare(attempt, this.password);
-  }
+    @BeforeInsert()
+    async hashPassword() {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
+
+    @BeforeInsert()
+    async generateID() {
+        let snowflake = Snowflake.generate()
+        this.id =  parseInt(snowflake.id)
+    }
+
+    async comparePassword(attempt: string): Promise<boolean> {
+        return await bcrypt.compare(attempt, this.password);
+    }
 }
+
