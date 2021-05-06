@@ -9,8 +9,7 @@ export class AuthPayload {
 
 @InputType()
 export class SignUpArgs {
-  @Field() firstName: string;
-  @Field() lastName: string;
+  @Field() username: string;
   @Field() password: string;
   @Field() email: string;
 }
